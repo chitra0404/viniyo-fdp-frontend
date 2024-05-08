@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
+import { Base_Url } from "../../config/api";
 
 
 
@@ -20,7 +21,7 @@ import axios from 'axios';
           };    
           try {
             
-            await axios.post(`http://localhost:3000/user/register`, userData)
+            await axios.post(`${Base_Url}/user/register`, userData)
             .then(res=>console.log(res));
             
             setRegistered(false)

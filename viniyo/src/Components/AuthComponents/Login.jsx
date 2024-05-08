@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import axios from "axios";
 import { useDispatch } from 'react-redux';
 import { loginUser } from "../../Redux/Reducer/UserReducer";
+import { Base_Url } from "../../config/api";
 
 function Login() {
  const dispatch=useDispatch();
@@ -18,7 +19,7 @@ const handleLoginSubmit = async (e) => {
     e.preventDefault();
     setOpen(true)
     try{
-     const res = await axios.post("http://localhost:3000/user/login", user)
+     const res = await axios.post(`${Base_Url}/user/login`, user)
      console.log(res);
      if(res?.status === 200){
        setUser({email:"", password:""})

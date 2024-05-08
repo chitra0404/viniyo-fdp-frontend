@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Base_Url } from '../config/api';
 
 const PastOder=({handleShow})=>{
     const [order,setOrder]=useState([]);
@@ -7,7 +8,7 @@ const PastOder=({handleShow})=>{
     useEffect(()=>{
         const fetchOrder=async()=>{
 try{
-    const response = await axios.get('http://localhost:3000/order/get');
+    const response = await axios.get(`${Base_Url}/order/get`);
     setOrder(response.data);
 }
 catch(err){

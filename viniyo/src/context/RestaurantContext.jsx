@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { Base_Url } from "../config/api";
 
 const RestaurantContext=createContext();
     const RestaurantProvider=({children})=>{
@@ -12,7 +13,7 @@ const RestaurantContext=createContext();
     useEffect(()=>{
         const fetchRest=async()=>{
             try{
-                const res=await axios.get("http://localhost:3000/rest/get")
+                const res=await axios.get(`${Base_Url}/rest/get`)
                 console.log(res.data)
                 setRestaurants(res.data)
             }

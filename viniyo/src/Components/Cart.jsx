@@ -4,6 +4,7 @@ import {  useNavigate} from "react-router-dom";
 
 import {RestaurantContext} from '../context/RestaurantContext'
 import PastOder from "./PastOder";
+import { Base_Url } from "../config/api";
 
 
 function Cart(){
@@ -46,7 +47,7 @@ function Cart(){
             try {
               const token = localStorage.getItem('tokenAuth')
               const config = { headers : {"x-auth-token" : token}}
-              const verifyURl = `httlp://localhost:3000/payment/verify`
+              const verifyURl = `${Base_Url}/payment/verify`
               const resp = await axios.post(verifyURl, {...response, ...order, email}, config)
             console.log("verify resp", resp) 
               updateStock(order)
@@ -71,7 +72,7 @@ function Cart(){
           try {
             const token = localStorage.getItem('tokenAuth')
             const config = { headers : {"x-auth-token" : token}}
-            const failureURl = `http://localhost:3000/apayment/failed`
+            const failureURl = `${Base_Url}/apayment/failed`
             const resp = await axios.post(failureURl, {...data.error.metadata, ...order, email}, config)
             //console.log("failed resp", resp) 
             updateStock(order)
@@ -96,7 +97,7 @@ function Cart(){
             handleOpen();
             try {
               const config = { headers : {"x-auth-token" : token}}
-              const {data} = await axios.post(`http://localhost:3000/payment/orders`,
+              const {data} = await axios.post(`${Base_Url}/payment/orders`,
               { amount: order.amount}, config)
               console.log("data",data)
               initPayment(data.data, order, email)
@@ -149,7 +150,7 @@ function Cart(){
     const handleCheck=async()=>{
         try{
 setCheck(false);
-const order= await axios.post("http://localhost:3000/order/past")
+const order= await axios.post(`${Base_Url}/order/past`)
 
 emptycart();
     }
